@@ -17,6 +17,11 @@ const common = {
   // Entry accepts a path or an object of entries.
   // The build chapter contains an example of the latter.
   entry: PATHS.app,
+
+  // '' is needed to allow imports without extensions.
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
@@ -25,11 +30,18 @@ const common = {
   module: {
     loaders: [
       {
-        // Test expects a RegExp! Note the slashes!
         test: /\.css$/,
         loaders: ['style', 'css'],
+        include: PATHS.app
+      },
 
-        // Include accepts a path or an array of paths.
+      // Setup jsx.
+      {
+        test: /\.jsx?$/,
+
+        // Enable caching for performance during dev
+        // Uses default OS directory
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       }
     ]

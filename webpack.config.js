@@ -12,6 +12,9 @@ const PATHS = {
   build: path.join(__dirname, 'build')
 };
 
+// Babel
+process.env.BABEL_ENV = TARGET;
+
 // Common configuration
 const common = {
   // Entry accepts a path or an object of entries.
